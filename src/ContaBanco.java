@@ -113,7 +113,7 @@ public class ContaBanco {
                 System.out.println("Saindo ... ");
                 System.out.println(System.getProperty("os.name"));
                 Thread.sleep(2000);
-               for (int i = 0; i < 50; i++) System.out.println();
+               for (int i = 0; i < 60; i++) System.out.println();
                 //System.out.print("\033[H\033[2J");
                 scan.close();
             }
