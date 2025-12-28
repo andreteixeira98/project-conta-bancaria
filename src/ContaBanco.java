@@ -78,6 +78,45 @@ public class ContaBanco {
 
                 
 
+            }else if(opcao==2){
+                int numeroAgencia=0;
+                int numeroConta=0;
+                BigDecimal valorDeposito=BigDecimal.ZERO;
+
+                System.out.println("Digite o numero da Agencia:");
+                numeroAgencia = Integer.parseInt(scan.nextLine());
+
+                System.out.println("Digite o numero da Conta:");
+                numeroConta = Integer.parseInt(scan.nextLine());
+
+                System.out.println("Digite o valor do Deposito: ex.: 10.50");
+                String valorDepositoString = scan.nextLine().replace(",", ".");
+                valorDeposito = new BigDecimal(valorDepositoString);
+
+                if(valorDeposito.compareTo(BigDecimal.ZERO) >0){
+                    
+                
+                   boolean isDepositado = false;
+
+                   for (Conta conta : Banco) {
+                        if(conta.numeroAgencia==numeroAgencia && conta.numeroConta==numeroConta){
+                            
+                            conta.Saldo= conta.Saldo.add(valorDeposito);
+                            
+
+                            isDepositado = true;
+                            break;
+                        }
+                   }
+                   if (isDepositado) System.out.println("Transação realizada com sucesso!");
+                   else System.out.println("Conta nao encontrada!");
+
+                }
+                else{
+                     System.out.println("Valor "+valorDeposito + " Invalido!");
+                }
+
+
             }
 
             else if(opcao==5){
