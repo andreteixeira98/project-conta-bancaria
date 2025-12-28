@@ -89,7 +89,7 @@ public class ContaBanco {
 
                 numeroAgencia = Integer.parseInt(scan.nextLine());
 
-                System.out.println("Digite o numero da Conta:\n");
+                System.out.println("Digite o numero  da Conta:\n");
                 numeroConta= Integer.parseInt(scan.nextLine());
 
                 Conta contaProcurada= null;
@@ -110,7 +110,7 @@ public class ContaBanco {
 
             else if(opcao==6) {
                 sair=true;
-                System.out.println("Saindo ...");
+                System.out.println("Saindo ... ");
                 System.out.println(System.getProperty("os.name"));
                 Thread.sleep(2000);
                for (int i = 0; i < 50; i++) System.out.println();
