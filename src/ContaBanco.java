@@ -95,15 +95,12 @@ public class ContaBanco {
 
                 if(valorDeposito.compareTo(BigDecimal.ZERO) >0){
                     
-                
                    boolean isDepositado = false;
 
                    for (Conta conta : Banco) {
                         if(conta.numeroAgencia==numeroAgencia && conta.numeroConta==numeroConta){
                             
                             conta.Saldo= conta.Saldo.add(valorDeposito);
-                            
-
                             isDepositado = true;
                             break;
                         }
@@ -115,6 +112,56 @@ public class ContaBanco {
                 else{
                      System.out.println("Valor "+valorDeposito + " Invalido!");
                 }
+
+
+            }
+            else if(opcao==3){
+              int numeroAgencia = 0;
+              int numeroConta = 0;
+              BigDecimal valorSaque = BigDecimal.ZERO;  
+            
+              
+
+              System.out.println("Digite o numero da Agencia:");
+              numeroAgencia= Integer.parseInt(scan.nextLine());
+
+              System.out.println("Digite o numero da Conta:");
+              numeroConta = Integer.parseInt(scan.nextLine());
+
+              System.out.println("Digite o Valor do saque: ex.: 100,00");
+
+              String valorsaqueString = scan.nextLine().replace(",", ".");
+              valorSaque = new BigDecimal(valorsaqueString);
+
+              if(valorSaque.compareTo(BigDecimal.ZERO) >0){
+                boolean isSucess = false;
+                for (Conta conta : Banco) {
+                    if(conta.numeroAgencia == numeroAgencia && conta.numeroConta == numeroConta){
+                        if(conta.Saldo.compareTo(valorSaque) > 0 && conta.Saldo.compareTo(BigDecimal.ZERO) > 0 ){
+                            conta.Saldo = conta.Saldo.subtract(valorSaque);
+                            isSucess = true;
+                            break;
+                        }else{
+                            System.out.println("valor Saque invalido!");
+                        }
+                        
+                    }
+                }
+
+                if(isSucess){
+                    System.out.println("Saque Realizado com sucesso!");
+                }
+              }else{
+                System.out.println("Valor saque invalido!");
+              }
+
+
+
+
+
+
+
+
 
 
             }
