@@ -1,5 +1,7 @@
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -119,8 +121,6 @@ public class ContaBanco {
               int numeroAgencia = 0;
               int numeroConta = 0;
               BigDecimal valorSaque = BigDecimal.ZERO;  
-            
-              
 
               System.out.println("Digite o numero da Agencia:");
               numeroAgencia= Integer.parseInt(scan.nextLine());
@@ -133,37 +133,28 @@ public class ContaBanco {
               String valorsaqueString = scan.nextLine().replace(",", ".");
               valorSaque = new BigDecimal(valorsaqueString);
 
-              if(valorSaque.compareTo(BigDecimal.ZERO) >0){
-                boolean isSucess = false;
+
+              if(valorSaque.compareTo(BigDecimal.ZERO) > 0){
+                boolean contaAptarParaSaque = false;
+
                 for (Conta conta : Banco) {
-                    if(conta.numeroAgencia == numeroAgencia && conta.numeroConta == numeroConta){
-                        if(conta.Saldo.compareTo(valorSaque) > 0 && conta.Saldo.compareTo(BigDecimal.ZERO) > 0 ){
-                            conta.Saldo = conta.Saldo.subtract(valorSaque);
-                            isSucess = true;
-                            break;
-                        }else{
-                            System.out.println("valor Saque invalido!");
-                        }
-                        
+                    if(conta.numeroAgencia==numeroAgencia && conta.numeroConta==numeroConta && conta.Saldo.compareTo(valorSaque) >=0){
+                        MathContext metodoOperacaoMatematica = new MathContext(10,RoundingMode.HALF_EVEN);
+                        conta.Saldo = conta.Saldo.subtract(valorSaque, metodoOperacaoMatematica).setScale(2,RoundingMode.HALF_EVEN);
+                        contaAptarParaSaque = true;
+                        break;
                     }
                 }
 
-                if(isSucess){
-                    System.out.println("Saque Realizado com sucesso!");
-                }
-              }else{
-                System.out.println("Valor saque invalido!");
-              }
+                if(contaAptarParaSaque) System.out.println("Saque realizado com Sucesso!");
+                else  System.out.println("Conta nao encontrada ou nao apta para essa operação!");
 
+            }else System.out.println("Valor Saque Inválido!");
+              
+            }
 
-
-
-
-
-
-
-
-
+            else if(opcao == 4){
+                
             }
 
             else if(opcao==5){
@@ -196,13 +187,22 @@ public class ContaBanco {
 
             else if(opcao==6) {
                 sair=true;
-                System.out.println("Saindo ...");
                 System.out.println(System.getProperty("os.name"));
-                Thread.sleep(2000);
-               for (int i = 0; i < 50; i++) System.out.println();
+                System.out.println("Saindo ...");
+                
+                
+               //for (int i = 0; i < 50; i++) System.out.println();
                 //System.out.print("\033[H\033[2J");
                 scan.close();
             }
+
+            else{
+                System.out.println("opção Inválida!");
+            }
+
+            Thread.sleep(1700);
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
             
 
         } while (sair!=true);
