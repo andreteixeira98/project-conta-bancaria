@@ -131,22 +131,22 @@ public class ContaBanco {
               System.out.println("Digite o Valor do saque: ex.: 100,00");
 
               String valorsaqueString = scan.nextLine().replace(",", ".");
-              valorSaque = new BigDecimal(valorsaqueString);
+              valorSaque = new BigDecimal(valorsaqueString).setScale(2,RoundingMode.HALF_EVEN);
 
 
               if(valorSaque.compareTo(BigDecimal.ZERO) > 0){
-                boolean contaAptarParaSaque = false;
+                boolean contaAptaParaSaque = false;
+                MathContext metodoOperacaoMatematica = new MathContext(16,RoundingMode.HALF_EVEN);
 
                 for (Conta conta : Banco) {
                     if(conta.numeroAgencia==numeroAgencia && conta.numeroConta==numeroConta && conta.Saldo.compareTo(valorSaque) >=0){
-                        MathContext metodoOperacaoMatematica = new MathContext(10,RoundingMode.HALF_EVEN);
                         conta.Saldo = conta.Saldo.subtract(valorSaque, metodoOperacaoMatematica).setScale(2,RoundingMode.HALF_EVEN);
-                        contaAptarParaSaque = true;
+                        contaAptaParaSaque = true;
                         break;
                     }
                 }
 
-                if(contaAptarParaSaque) System.out.println("Saque realizado com Sucesso!");
+                if(contaAptaParaSaque) System.out.println("Saque realizado com Sucesso!");
                 else  System.out.println("Conta nao encontrada ou nao apta para essa operação!");
 
             }else System.out.println("Valor Saque Inválido!");
