@@ -51,7 +51,6 @@ Escolha entre uma das opcoes abaixo:
 4) Transferencia
 5) Saldo
 6) Sair
-> 5
 Seu saldo atual e de R$: 1000.00
 
 
